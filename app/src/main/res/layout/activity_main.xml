@@ -26,7 +26,16 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
-
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/findEditText"
+        android:background="@color/teal_700"
+        android:layout_above="@+id/findseasonsButton"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:hint="Enter season"
+        android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/findseasonsButton"
         android:layout_width="245dp"
@@ -35,5 +44,7 @@
         android:layout_centerHorizontal="true"
         android:color="#252425"
         android:text="Find Seasons" />
+
+
 
 </RelativeLayout>
