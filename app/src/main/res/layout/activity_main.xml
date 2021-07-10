@@ -27,18 +27,6 @@
         android:textStyle="bold"
         android:textColor="@color/white"/>
 
-
-<!--    <EditText-->
-<!--        android:id="@+id/seasons"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/findseasonsButton"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:padding="5dp"-->
-<!--        android:background="@color/teal_700"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:hint="season's premiere" />-->
-
     <Button
         android:id="@+id/findseasonsButton"
         android:layout_width="245dp"
