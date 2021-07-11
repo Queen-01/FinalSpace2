@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,8 +13,18 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.finalspace.model.FinalSpaceSearchResponse;
+import com.example.finalspace.service.FinalSpaceApi;
+import com.example.finalspace.service.FinalSpaceClient;
+
+import java.io.IOException;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Callback;
 
 public class FindActivity extends AppCompatActivity {
     @BindView(R.id.list) ListView mListView;
@@ -23,7 +34,9 @@ public class FindActivity extends AppCompatActivity {
     private String[] Chapters = new String[] {
             "Chapter One", "Chapter Two", "Chapter Three"
     };
-//    private String[] Scenes = new String[]{
+    private String location;
+
+    //    private String[] Scenes = new String[]{
 //            "The Toro Regetta", "The Happy Place", "The Grand Surrender", "The Other Side", "The Notorious Mrs.Goodspeed",
 //            "Arachnitects", "The First Times They Met", "The Remembered", "The Closer You Get", "The Lost Spy"
 //    };
@@ -46,6 +59,32 @@ public class FindActivity extends AppCompatActivity {
                 Toast.makeText(FindActivity.this, seasons, Toast.LENGTH_LONG).show();
             }
         });
+
+        FinalSpaceApi client = FinalSpaceClient.getClient();
+        Call<FinalSpaceSearchResponse> call = client.getFinalSpace(location, "Seasons");
+
+        call.enqueue(new Callback<FinalSpaceSearchResponse>()){
+            @Override
+            public void onResponse(Call<FinalSpaceSearchResponse> call, Response<FinalSpaceSearchResponse> response){
+                Seasons seasonsList = response.body().getType();
+                String[] chapters = new String[chaptersList.size()];
+                String[] episodes = new String[episodesList.size()];
+
+                for (int i = 0; i<chapters.length; i++){
+                    chapters[i] = chaptersList.get(i).get
+
+                }
+            }
+        }
+//        public void getSeasons() throws Exception{
+//            Request request = new Request.Builder()
+//                    .url("https://finalspaceapi.com/api/v0/")
+//                    .build();
+//            try (Response response = client.newCall(request).execute) {
+//                if (!response.isSuccessful())throw new IOException(""+ response);
+//                System.out.println(response.body().string());
+//            }
+//        }
     }
 
 }
