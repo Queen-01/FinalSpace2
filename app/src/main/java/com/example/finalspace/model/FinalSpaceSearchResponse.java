@@ -4,6 +4,8 @@ package com.example.finalspace.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class FinalSpaceSearchResponse {
 
     @SerializedName("type")
@@ -19,6 +21,8 @@ public class FinalSpaceSearchResponse {
     @Expose
     private String fullUrl;
 
+    private List<Episode> episodes =null;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -33,9 +37,10 @@ public class FinalSpaceSearchResponse {
      * @param name
      * @param type
      */
-    public FinalSpaceSearchResponse(String type, String name, String path, String fullUrl) {
+    public FinalSpaceSearchResponse(String type,List<Episode> episodes, String name, String path, String fullUrl) {
         super();
         this.type = type;
+        this.episodes = episodes;
         this.name = name;
         this.path = path;
         this.fullUrl = fullUrl;
