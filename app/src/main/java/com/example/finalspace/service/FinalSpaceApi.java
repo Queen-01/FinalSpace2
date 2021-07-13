@@ -10,5 +10,5 @@ import retrofit2.http.Query;
 
 public interface FinalSpaceApi {
     @GET("episode")
-    Call<List<Episode>>getEpisode();
+    Call<List<Episode>> getEpisode();
 }

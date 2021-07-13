@@ -33,7 +33,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/list"
+        android:id="@+id/recyclerView"
         android:layout_below="@+id/textView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -41,11 +41,11 @@
 
     </ListView>
 
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Checkout episodes"-->
-<!--        android:layout_width="245dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_centerHorizontal="true"/>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/button2"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Checkout episodes"-->
+    <!--        android:layout_width="245dp"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_centerHorizontal="true"/>-->
 </RelativeLayout>

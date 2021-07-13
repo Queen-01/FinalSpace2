@@ -1,18 +1,26 @@
-package com.example.finalspace;
+package com.example.finalspace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.finalspace.adapter.FindSpaceListAdapter;
+//import com.example.finalspace.adapter.FindSpaceListAdapter;
+import com.example.finalspace.FindArrayAdapter;
+import com.example.finalspace.R;
+import com.example.finalspace.adapter.EpisodeListAdapter;
 import com.example.finalspace.model.Episode;
 import com.example.finalspace.service.FinalSpaceApi;
 import com.example.finalspace.service.FinalSpaceClient;
@@ -24,15 +32,16 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class FindActivity extends AppCompatActivity {
-    @BindView(R.id.list) ListView mListView;
+    @BindView(R.id.recyclerView) ListView mRecyclerView;
+    @BindView(R.id.textView) TextView mTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
-    private FindSpaceListAdapter mAdapter;
+
+    private EpisodeListAdapter mAdapter;
     public List<Episode> episodes;
-//ide
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
@@ -40,38 +49,32 @@ public class FindActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String find = intent.getStringExtra("find");
+//
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String seasons = ((TextView) view).getText().toString();
+//                Toast.makeText(FindActivity.this, seasons, Toast.LENGTH_LONG).show();
+//            }
+//        });
 
-//        FindArrayAdapter adapter = new FindArrayAdapter(this, android.R.layout.simple_list_item_1, Seasons, Chapters);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String seasons = ((TextView) view).getText().toString();
-                Toast.makeText(FindActivity.this, seasons, Toast.LENGTH_LONG).show();
-            }
-        });
-        FinalSpaceApi client = FinalSpaceClient.getClient();
-        Call<List<Episode>> call = client.getEpisode();
+        FinalSpaceApi apiService = FinalSpaceClient.getClient();
+        Call<List<Episode>> call = apiService.getEpisode();
         call.enqueue(new Callback<List<Episode>>() {
             @Override
             public void onResponse(Call<List<Episode>> call, Response<List<Episode>> response) {
                 hideProgressBar();
-                if (response.isSuccessful()){
-                    List<Episode> episodesList = response.body().getEpisode();
-                    String[] episodes = new String[episodesList.siza()];
-                    String[] characters = new String[episodesList.size()];
-                    for (int i = 0; i< episodes.length; i++){
-                        episodes[i] = episodes.get(i).getCharacters();
-                    }
-                    for (int i = 0; i < characters.length; i++){
-                        Episode episode = episodes.get(i).getAirDate();
-                        characters[i] = character.getName;
-                    }
-                    ArrayAdapter adapter = new FindArrayAdapter(FindActivity.this, android.R.layout.simple_list_item_1, episodes,characters);
-                    mListView.setAdapter(adapter);
+                if(response.isSuccessful()){
+                    episodes = response.body();
+                    mAdapter = new EpisodeListAdapter(FindActivity.this,episodes);
+                    mRecyclerView.setAdapter((ListAdapter) mAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(FindActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasTransientState(true);
+                    Log.d("TAG", "Response =  " + episodes);
 
                     showEpisodes();
-                }else{
+                }else {
                     showUnsuccessfulMessage();
                 }
             }
@@ -80,6 +83,7 @@ public class FindActivity extends AppCompatActivity {
             public void onFailure(Call<List<Episode>> call, Throwable t) {
                 hideProgressBar();
                 showFailureMessage();
+                Log.d("TAG", "Response = " + t.toString());
             }
         });
     }
@@ -92,7 +96,7 @@ public class FindActivity extends AppCompatActivity {
     mErrorTextView.setVisibility(View.VISIBLE);
     }
     public void showEpisodes(){
-    mListView.setVisibility(View.VISIBLE);
+    mRecyclerView.setVisibility(View.VISIBLE);
     }
     public void hideProgressBar(){
     mProgressBar.setVisibility(View.GONE);
