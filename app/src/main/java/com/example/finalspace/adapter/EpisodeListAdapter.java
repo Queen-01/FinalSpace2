@@ -52,7 +52,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         @BindView(R.id.episodeImageView) ImageView mEpisodeImageView;
         @BindView(R.id.episodeName ) TextView mEpisodeNameTextView;
         @BindView(R.id.somethingEpisode) TextView mWeWillSeeWhatTextView;
-        @BindView(R.id.episode) TextView mAlbumTrackCountTextView;
+        @BindView(R.id.episode) TextView mCountTextView;
 
         private Context mContext;
 
@@ -65,7 +65,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         public void bindAlbum(Episode response) {
             mEpisodeNameTextView.setText( response.getName());
             mWeWillSeeWhatTextView.setText("Writer :" +response.getWriter());
-            mAlbumTrackCountTextView.setText("Director: " +response.getDirector());
+            mTextView.setText("Director: " +response.getDirector());
             Picasso.get().load(response.getImgUrl()).into(mEpisodeImageView);
             Log.e("Let us see",response.getImgUrl());
         }
