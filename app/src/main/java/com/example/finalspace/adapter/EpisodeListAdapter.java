@@ -65,7 +65,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         public void bindAlbum(Episode response) {
             mEpisodeNameTextView.setText( response.getName());
             mWeWillSeeWhatTextView.setText("Writer :" +response.getWriter());
-            mTextView.setText("Director: " +response.getDirector());
+            mCountTextView.setText("Director: " +response.getDirector());
             Picasso.get().load(response.getImgUrl()).into(mEpisodeImageView);
             Log.e("Let us see",response.getImgUrl());
         }

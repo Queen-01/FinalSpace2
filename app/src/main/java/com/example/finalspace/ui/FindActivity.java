@@ -2,7 +2,6 @@ package com.example.finalspace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,7 +70,7 @@ public class FindActivity extends AppCompatActivity {
                     Log.e("Let us see","We got here response successful");
                     ListEpisodes = response;
                     mAdapter = new EpisodeListAdapter(FindActivity.this, ListEpisodes);
-                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setAdapter((ListAdapter) mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(FindActivity.this);
                     mRecyclerView.setLayoutMode(0);
                     mRecyclerView.setHasTransientState(true);
