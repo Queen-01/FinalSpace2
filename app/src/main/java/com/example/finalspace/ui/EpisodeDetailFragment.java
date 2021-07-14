@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.finalspace.model.Episode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class EpisodeDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_episode_detail,container,false);
         ButterKnife.bind(this, view);
-//        Picasso.get().load(episodesList.getImgUrl()).into(mImageView);
+        Picasso.get().load("http://finalspaceapi.com/episode/image").into(mImageView);
         return inflater.inflate(R.layout.fragment_episode_detail, container, false);
     }
 }

@@ -34,10 +34,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FindActivity extends AppCompatActivity {
-    @BindView(R.id.recyclerView) ListView mRecyclerView;
-    @BindView(R.id.textView) TextView mTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.recyclerView)
+    ListView mRecyclerView;
+    @BindView(R.id.textView)
+    TextView mTextView;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.errorTextView)
+    TextView mErrorTextView;
 
     private EpisodeListAdapter mAdapter;
     public Response<List<Episode>> ListEpisodes;
@@ -45,14 +49,15 @@ public class FindActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
         String find = intent.getStringExtra("find");
-//
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
+
+
+//       mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//           @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                String seasons = ((TextView) view).getText().toString();
 //                Toast.makeText(FindActivity.this, seasons, Toast.LENGTH_LONG).show();
@@ -67,10 +72,10 @@ public class FindActivity extends AppCompatActivity {
                 hideProgressBar();
 
                 if (response.isSuccessful()) {
-                    Log.e("Let us see","We got here response successful");
+                    Log.e("Let us see", "We got here response successful");
                     ListEpisodes = response;
                     mAdapter = new EpisodeListAdapter(FindActivity.this, ListEpisodes);
-                    mRecyclerView.setAdapter((ListAdapter) mAdapter);
+//                    mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(FindActivity.this);
                     mRecyclerView.setLayoutMode(0);
                     mRecyclerView.setHasTransientState(true);
@@ -89,18 +94,22 @@ public class FindActivity extends AppCompatActivity {
             }
         });
     }
-    private void showFailureMessage(){
+
+    private void showFailureMessage() {
         mErrorTextView.setText("Please check your internet connection");
         mErrorTextView.setVisibility(View.VISIBLE);
     }
-    private void showUnsuccessfulMessage(){
-    mErrorTextView.setText("Something went wrong. Please try again later");
-    mErrorTextView.setVisibility(View.VISIBLE);
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
     }
-    public void showEpisodes(){
-    mRecyclerView.setVisibility(View.VISIBLE);
+
+    public void showEpisodes() {
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
-    public void hideProgressBar(){
-    mProgressBar.setVisibility(View.GONE);
+
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
     }
 }
