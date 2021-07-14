@@ -2,6 +2,7 @@ package com.example.finalspace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -11,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,11 +40,12 @@ public class FindActivity extends AppCompatActivity {
     @BindView(R.id.errorTextView) TextView mErrorTextView;
 
     private EpisodeListAdapter mAdapter;
-    public List<Episode> episodes;
+    public Response<List<Episode>> ListEpisodes;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
@@ -64,17 +65,18 @@ public class FindActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Episode>> call, Response<List<Episode>> response) {
                 hideProgressBar();
-                if(response.isSuccessful()){
-                    episodes = response.body();
-                    mAdapter = new EpisodeListAdapter(FindActivity.this,episodes);
-                    mRecyclerView.setAdapter((ListAdapter) mAdapter);
+
+                if (response.isSuccessful()) {
+                    Log.e("Let us see","We got here response successful");
+                    ListEpisodes = response;
+                    mAdapter = new EpisodeListAdapter(FindActivity.this, ListEpisodes);
+                    mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(FindActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setLayoutMode(0);
                     mRecyclerView.setHasTransientState(true);
-                    Log.d("TAG", "Response =  " + episodes);
 
                     showEpisodes();
-                }else {
+                } else {
                     showUnsuccessfulMessage();
                 }
             }
@@ -83,7 +85,7 @@ public class FindActivity extends AppCompatActivity {
             public void onFailure(Call<List<Episode>> call, Throwable t) {
                 hideProgressBar();
                 showFailureMessage();
-                Log.d("TAG", "Response = " + t.toString());
+                Log.d("Lets check it out", "Response = " + t.toString());
             }
         });
     }
