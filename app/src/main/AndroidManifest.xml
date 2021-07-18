@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.finalspace">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.queen.finalspace">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,13 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalSpace">
-<!--        <activity android:name=".EpisodeActivity"></activity>-->
-        <activity android:name=".ui.FindActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.finalspace.ui.FindActivity"></meta-data>
+        <activity android:name="com.queen.finalspace.ui.EpisodeDetailActivity"></activity>
+        <!-- <activity android:name=".EpisodeActivity"></activity> -->
+        <activity android:name="com.queen.finalspace.ui.FindActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.queen.finalspace.ui.FindActivity" />
         </activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.queen.finalspace.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
