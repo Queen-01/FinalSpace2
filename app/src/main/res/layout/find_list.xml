@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/images"
         android:scaleType="centerCrop"
         android:id="@+id/episodeImageView" />
@@ -21,29 +21,38 @@
             android:id="@+id/episodeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jazz"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="26sp"
             android:textStyle="bold"/>
         <TextView
-            android:id="@+id/somethingEpisode"
+            android:id="@+id/episodeCharacters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"
             android:text="Characters" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/airDate"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:text="Air Date" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/episode"
+                android:id="@+id/episodeDirector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
                 android:layout_alignParentRight="true"
-                android:text="180 songs"/>
+                android:padding="15dp"
+                android:text="Director" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
