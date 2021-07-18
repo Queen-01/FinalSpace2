@@ -1,4 +1,4 @@
-package com.example.finalspace.ui;
+package com.queen.finalspace.ui;
 
 import  androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.finalspace.R;
+import com.queen.finalspace.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, "Watch Out!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, FindActivity.class);
             intent.putExtra("find", find);
-//                Log.d(TAG, season)
             startActivity(intent);
         }
     }
