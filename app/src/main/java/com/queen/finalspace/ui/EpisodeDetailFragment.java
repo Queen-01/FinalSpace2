@@ -1,28 +1,23 @@
-package com.example.finalspace.ui;
+package com.queen.finalspace.ui;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.finalspace.model.Episode;
+import com.queen.finalspace.model.Episode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.finalspace.R;
-import com.example.finalspace.model.Episode;
+import com.queen.finalspace.R;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,41 +25,38 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class EpisodeDetailFragment extends Fragment {
-    private static String episodesList;
+
     @BindView(R.id.episodeImageView) ImageView mImageView;
-    @BindView(R.id.episodeName) TextView mEpisodeTextView;
-    @BindView(R.id.episode) TextView mEpisodeLabelTextView;
+    @BindView(R.id.detailEpisodeName) TextView mEpisodeName;
+    @BindView(R.id.detailEpisodeWriter) TextView mEpisodeWriter;
+    @BindView(R.id.detailEpisodeDirector) TextView mEpisodeDirector;
+
     @BindView(R.id.like) TextView mLikeTextView;
     @BindView(R.id.unlike) TextView mUnlikeTextView;
+    private Episode episode;
 
-//    private Episode episodesList;
+
 
     public EpisodeDetailFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EpisodeDetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EpisodeDetailFragment newInstance(String param1, String param2) {
+
+    public static EpisodeDetailFragment newInstance(Episode episode) {
+
         EpisodeDetailFragment episodeDetailFragment = new EpisodeDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("episodes", Parcels.wrap(episodesList));
+        args.putParcelable("episode", Parcels.wrap(episode));
         episodeDetailFragment.setArguments(args);
         return episodeDetailFragment;
+
     }
 
     @Override
-    public void onCreate(@Nullable  Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
-            episodesList = Parcels.unwrap(getArguments().getParcelable("episode"));
+        episode = Parcels.unwrap(getArguments().getParcelable("episode"));
     }
 
     @Override
@@ -73,7 +65,10 @@ public class EpisodeDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_episode_detail,container,false);
         ButterKnife.bind(this, view);
-        Picasso.get().load("http://finalspaceapi.com/episode/image").into(mImageView);
-        return inflater.inflate(R.layout.fragment_episode_detail, container, false);
+        Picasso.get().load(R.drawable.images).into(mImageView);
+        mEpisodeName.setText("Episode Name: "+episode.getName());
+        mEpisodeWriter.setText("Episode Writer: " + episode.getWriter());
+        mEpisodeDirector.setText("Episode Director :" + episode.getDirector());
+        return view;
     }
 }
