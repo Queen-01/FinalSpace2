@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, "Watch Out!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, FindActivity.class);
             intent.putExtra("find", find);
-            startActivity(intent)
+            startActivity(intent);
         }
     }
 
