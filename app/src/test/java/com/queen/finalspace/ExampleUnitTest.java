@@ -1,4 +1,4 @@
-package com.example.finalspace;
+package com.queen.finalspace;
 
 import org.junit.Test;
 
